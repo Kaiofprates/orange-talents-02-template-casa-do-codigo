@@ -1,6 +1,6 @@
 package br.com.zup.desafio1;
 
-import br.com.zup.desafio1.controllers.repository.AuthorRepository;
+import br.com.zup.desafio1.repository.AuthorRepository;
 import br.com.zup.desafio1.models.Author;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 

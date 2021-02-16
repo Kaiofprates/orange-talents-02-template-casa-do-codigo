@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.controllers.repository;
+package br.com.zup.desafio1.repository;
 
 import br.com.zup.desafio1.models.Author;
 import org.springframework.data.repository.CrudRepository;

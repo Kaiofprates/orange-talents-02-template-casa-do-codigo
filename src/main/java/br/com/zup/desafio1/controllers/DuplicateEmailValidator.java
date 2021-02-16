@@ -1,7 +1,7 @@
 package br.com.zup.desafio1.controllers;
 
 import br.com.zup.desafio1.controllers.form.AuthorRequest;
-import br.com.zup.desafio1.controllers.repository.AuthorRepository;
+import br.com.zup.desafio1.repository.AuthorRepository;
 import br.com.zup.desafio1.models.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
