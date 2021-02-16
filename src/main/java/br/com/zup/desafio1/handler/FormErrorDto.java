@@ -3,18 +3,18 @@ package br.com.zup.desafio1.handler;
 public class FormErrorDto {
 
     private String field;
-    private String error;
+    private String message;
 
-    public FormErrorDto(String field, String error) {
+    public FormErrorDto(String field, String message) {
         this.field = field;
-        this.error = error;
+        this.message = message;
     }
 
     public String getField() {
         return field;
     }
 
-    public String getError() {
-        return error;
+    public String getMessage() {
+        return message;
     }
 }
