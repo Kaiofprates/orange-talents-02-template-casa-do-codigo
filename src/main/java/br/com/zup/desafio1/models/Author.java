@@ -1,7 +1,6 @@
 package br.com.zup.desafio1.models;
 
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -25,7 +24,7 @@ public class Author {
     @Size(max = 400)
     private String description;
     @DateTimeFormat
-    private LocalDate register = LocalDate.now();
+    private LocalDateTime register = LocalDateTime.now();
 
     public Long getId() {
         return id;
@@ -39,7 +38,7 @@ public class Author {
     public String getDescription() {
         return description;
     }
-    public LocalDate getRegister() {
+    public LocalDateTime getRegister() {
         return register;
     }
 
@@ -49,4 +48,15 @@ public class Author {
         this.description = description;
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", register=" + register +
+                '}';
+    }
 }
