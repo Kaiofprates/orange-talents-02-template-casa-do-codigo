@@ -27,4 +27,8 @@ public class AuthorRequest {
         Author author = new Author(this.name,this.email,this.description);
         return author;
     }
+
+    public Object getEmail() {
+        return this.email;
+    }
 }
