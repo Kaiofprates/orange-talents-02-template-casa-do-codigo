@@ -3,10 +3,7 @@ package br.com.zup.desafio1.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,12 +16,17 @@ public class Author {
     private String name;
     @NotBlank
     @Email
+    @Column(unique = true)
     private String email;
     @NotBlank
     @Size(max = 400)
     private String description;
     @DateTimeFormat
     private LocalDateTime register = LocalDateTime.now();
+
+    @Deprecated
+    public Author() {
+    }
 
     public Long getId() {
         return id;

@@ -1,5 +1,7 @@
 package br.com.zup.desafio1;
 
+import br.com.zup.desafio1.controllers.repository.AuthorRepository;
+import br.com.zup.desafio1.models.Author;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Optional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
@@ -20,6 +24,9 @@ public class AuthorFormTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Test
     public void nameEmptyTest() throws  Exception{
@@ -90,7 +97,23 @@ public class AuthorFormTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    public void duplicateEmailTest() throws  Exception{
+        AuthorRequestTest data  = new AuthorRequestTest("John Doe","test@email.com","new author");
 
+        Author author = new Author(data.getName(), data.getEmail(), data.getDescription());
+        authorRepository.save(author);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/author")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(data))
+        ).andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(jsonPath("$[0].message").isString())
+                .andExpect(jsonPath("$[0].message").value("The informed email already exists "+ data.getEmail()))
+                .andExpect(jsonPath("$[0].field").value("email"))
+                .andDo(MockMvcResultHandlers.print());
+    }
 
 
 }
