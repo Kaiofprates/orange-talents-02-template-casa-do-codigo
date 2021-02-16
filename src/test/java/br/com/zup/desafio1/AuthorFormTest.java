@@ -3,6 +3,7 @@ package br.com.zup.desafio1;
 import br.com.zup.desafio1.repository.AuthorRepository;
 import br.com.zup.desafio1.models.Author;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +27,7 @@ public class AuthorFormTest {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @DisplayName("Deveria lidar com nome vazio")
     @Test
     public void nameEmptyTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("","test@email.com","name test");
@@ -39,6 +41,7 @@ public class AuthorFormTest {
                 .andExpect(jsonPath("$[0].field").value("name"))
                 .andDo(MockMvcResultHandlers.print());
     }
+    @DisplayName(" Deveria lidar com email vazio")
     @Test
     public void emailEmptyTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("John Doe","","name test");
@@ -53,6 +56,7 @@ public class AuthorFormTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @DisplayName("Deveria lidar com email mal formatado")
     @Test
     public void emailFormatTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("John Doe","test.com","name test");
@@ -67,6 +71,7 @@ public class AuthorFormTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @DisplayName("Deveria lidar com descrição vazia")
     @Test
     public void descriptionEmptyTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("John Doe","test@email.com","");
@@ -81,6 +86,7 @@ public class AuthorFormTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @DisplayName("Deveria lidar com descrição extrapolando o número maximo de caracteres")
     @Test
     public void descriptionMaxSizeTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("John Doe","test@email.com","tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt1");
@@ -95,6 +101,7 @@ public class AuthorFormTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @DisplayName("Deveria lidar com email duplicado")
     @Test
     public void duplicateEmailTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("John Doe","test@email.com","new author");
