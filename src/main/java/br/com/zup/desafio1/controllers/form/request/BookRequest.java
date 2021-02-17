@@ -18,11 +18,15 @@ public class BookRequest {
     @NotBlank
     @UniqueValue(domainClass = Book.class, fieldName = "title")
     private String title;
-    @NotBlank  @Size(max = 500) private String resume;
+    @NotBlank
+    @Size(max = 500)
+    private String resume;
     private String sumary;
-    @NotNull @Min(20)
+    @NotNull
+    @Min(20)
     private BigDecimal price;
-    @NotNull @Min(100)
+    @NotNull
+    @Min(100)
     private Long pages;
     @NotEmpty
     @UniqueValue(domainClass = Book.class, fieldName = "isbn")
@@ -56,30 +60,15 @@ public class BookRequest {
         this.authorId = authorId;
     }
 
-    @Override
-    public String toString() {
-        return "BookRequest{" +
-                "title='" + title + '\'' +
-                ", resume='" + resume + '\'' +
-                ", sumary='" + sumary + '\'' +
-                ", price=" + price +
-                ", pages=" + pages +
-                ", isbn='" + isbn + '\'' +
-                ", publication=" + publication +
-                ", categoryId=" + categoryId +
-                ", authoId=" + authorId +
-                '}';
-    }
+    public Book toModel(EntityManager manager) {
 
-    public Book toModel(EntityManager manager){
-
-        Author author = manager.find(Author.class,this.authorId);
+        Author author = manager.find(Author.class, this.authorId);
         Category category = manager.find(Category.class, this.categoryId);
 
-        Assert.state(author!=null,"Author not found");
-        Assert.state(category!=null, "Category not found");
+        Assert.state(author != null, "Author not found");
+        Assert.state(category != null, "Category not found");
 
-        Book book = new Book(this.title,this.sumary,this.price,this.pages,this.isbn,this.publication,category,author);
+        Book book = new Book(this.title, this.sumary, this.price, this.pages, this.isbn, this.publication, category, author);
         return book;
     }
 
