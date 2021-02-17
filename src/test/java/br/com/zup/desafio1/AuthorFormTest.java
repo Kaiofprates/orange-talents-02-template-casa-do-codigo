@@ -1,6 +1,5 @@
 package br.com.zup.desafio1;
 
-import br.com.zup.desafio1.repository.AuthorRepository;
 import br.com.zup.desafio1.models.Author;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +13,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
@@ -24,8 +27,8 @@ public class AuthorFormTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private AuthorRepository authorRepository;
+    @PersistenceContext
+    private EntityManager em;
 
     @DisplayName("Deveria lidar com nome vazio")
     @Test
@@ -102,12 +105,13 @@ public class AuthorFormTest {
     }
 
     @DisplayName("Deveria lidar com email duplicado")
+    @Transactional
     @Test
     public void duplicateEmailTest() throws  Exception{
         AuthorRequestTest data  = new AuthorRequestTest("John Doe","test@email.com","new author");
 
         Author author = new Author(data.getName(), data.getEmail(), data.getDescription());
-        authorRepository.save(author);
+        em.persist(author);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/author")
                 .accept(MediaType.APPLICATION_JSON)
@@ -115,7 +119,7 @@ public class AuthorFormTest {
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("The informed email already exists "+ data.getEmail()))
+                .andExpect(jsonPath("$[0].message").value("duplicate values"))
                 .andExpect(jsonPath("$[0].field").value("email"))
                 .andDo(MockMvcResultHandlers.print());
     }

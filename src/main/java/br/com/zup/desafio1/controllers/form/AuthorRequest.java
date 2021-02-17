@@ -1,6 +1,8 @@
 package br.com.zup.desafio1.controllers.form;
 
 import br.com.zup.desafio1.models.Author;
+import br.com.zup.desafio1.models.Category;
+import br.com.zup.desafio1.validate.UniqueValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,6 +14,7 @@ public class AuthorRequest {
     private String name;
     @NotBlank(message = "The email field cannot be empty")
     @Email(message = "Enter a valid email")
+    @UniqueValue(domainClass = Author.class, fieldName = "email")
     private String email;
     @NotEmpty(message = "The description field cannot be empty")
     @Size(max = 400, message = "The maximum number of words is 400")

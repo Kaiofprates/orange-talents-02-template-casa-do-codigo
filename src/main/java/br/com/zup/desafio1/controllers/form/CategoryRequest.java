@@ -1,11 +1,13 @@
 package br.com.zup.desafio1.controllers.form;
 
 import br.com.zup.desafio1.models.Category;
+import br.com.zup.desafio1.validate.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
 
 public class CategoryRequest {
-    @NotBlank(message = "The name field cannot")
+    @NotBlank(message = "The name field cannot be empty")
+    @UniqueValue(domainClass = Category.class, fieldName = "name")
     private String name;
 
      @Deprecated
