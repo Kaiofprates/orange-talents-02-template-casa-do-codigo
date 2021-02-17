@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Author {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String name;
@@ -31,15 +32,19 @@ public class Author {
     public Long getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getEmail() {
         return email;
     }
+
     public String getDescription() {
         return description;
     }
+
     public LocalDateTime getRegister() {
         return register;
     }
@@ -48,17 +53,5 @@ public class Author {
         this.name = name;
         this.email = email;
         this.description = description;
-    }
-
-
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", description='" + description + '\'' +
-                ", register=" + register +
-                '}';
     }
 }

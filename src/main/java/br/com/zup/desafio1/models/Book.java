@@ -1,14 +1,15 @@
 package br.com.zup.desafio1.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 public class Book {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
     private String sumary;
@@ -19,14 +20,14 @@ public class Book {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private  Category category;
+    private Category category;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    private  Author author;
+    private Author author;
 
     @Deprecated
-    public Book(){
+    public Book() {
     }
 
     public Book(String title, String sumary, BigDecimal price, Long pages, String isbn, LocalDate publication, Category category, Author author) {
@@ -40,28 +41,9 @@ public class Book {
         this.author = author;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", sumary='" + sumary + '\'' +
-                ", price=" + price +
-                ", pages=" + pages +
-                ", isbn='" + isbn + '\'' +
-                ", publication=" + publication +
-                ", category=" + category +
-                ", author=" + author +
-                '}';
-    }
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title;}
 
     public String getSumary() {
         return sumary;
