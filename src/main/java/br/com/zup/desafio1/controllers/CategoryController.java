@@ -58,20 +58,22 @@ public class CategoryController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Valid CategoryRequest form){
-        Optional<Category> category = repository.findById(id);
-        if(category.isPresent()){
-            Category update = form.update(id, repository);
-            return ResponseEntity.ok(update);
+        Category category = em.find(Category.class,id);
+        if(category != null){
+            category.setName(form.getName());
+            em.persist(category);
+            return ResponseEntity.ok(category);
         }
         return ResponseEntity.notFound().build();
+
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable Long id){
-        Optional<Category> category = repository.findById(id);
-        if(category.isPresent()){
-            repository.deleteById(id);
+        Category category = em.find(Category.class,id);
+        if(category != null){
+            em.remove(category);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

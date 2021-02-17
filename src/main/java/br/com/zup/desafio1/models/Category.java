@@ -24,7 +24,7 @@ public class Category {
     }
 
     public String setName(@NotBlank String name){
-        return this.name = this.name;
+        return this.name = name;
     }
 
     public Category(@NotBlank String name) {
