@@ -10,13 +10,12 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = {DateFutureValidador.class})
+@Constraint(validatedBy = {ExistIdValidator.class})
 @Target({ FIELD })
 @Retention(RUNTIME)
+public @interface  ExistId {
 
-public @interface FutureDate {
-
-    String message() default "Selecione uma data no futuro";
+    String message() default "Id not found";
 
     Class<?>[] groups() default {};
 

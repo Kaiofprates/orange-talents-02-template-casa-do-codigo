@@ -17,11 +17,11 @@ public class Book {
     private String isbn;
     private LocalDate publication;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private  Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private  Author author;
 

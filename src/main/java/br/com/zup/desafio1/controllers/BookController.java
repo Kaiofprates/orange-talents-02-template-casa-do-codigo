@@ -23,11 +23,8 @@ public class BookController {
     @PostMapping
     @Transactional
     public ResponseEntity<?> newBook(@RequestBody @Valid BookRequest request){
-        Author author = manager.find(Author.class,request.getAuthorId());
-        Category category = manager.find(Category.class, request.getCategoryId());
-
-        if(author != null && category != null){
-            Book book = request.toModel(author,category);
+        Book book = request.toModel(manager);
+        if(book != null){
             manager.persist(book);
             return ResponseEntity.ok(book.toString());
         }

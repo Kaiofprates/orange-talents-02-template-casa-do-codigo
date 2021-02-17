@@ -3,9 +3,12 @@ package br.com.zup.desafio1.controllers.form;
 import br.com.zup.desafio1.models.Author;
 import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
-import br.com.zup.desafio1.validate.FutureDate;
+import br.com.zup.desafio1.validate.ExistId;
 import br.com.zup.desafio1.validate.UniqueValue;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.util.Assert;
 
+import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,11 +27,13 @@ public class BookRequest {
     @NotEmpty
     @UniqueValue(domainClass = Book.class, fieldName = "isbn")
     private String isbn;
-    @FutureDate(domainClass = Book.class,fieldName = "publication")
+    @Future
     private LocalDate publication;
     @NotNull
+    @ExistId(domainClass = Category.class, fieldName = "id")
     private Long categoryId;
     @NotNull
+    @ExistId(domainClass = Author.class, fieldName = "id")
     private Long authorId;
 
     public BookRequest(String title,
@@ -66,16 +71,16 @@ public class BookRequest {
                 '}';
     }
 
-    public Book toModel(Author author, Category category){
+    public Book toModel(EntityManager manager){
+
+        Author author = manager.find(Author.class,this.authorId);
+        Category category = manager.find(Category.class, this.categoryId);
+
+        Assert.state(author!=null,"Author not found");
+        Assert.state(category!=null, "Category not found");
+
         Book book = new Book(this.title,this.sumary,this.price,this.pages,this.isbn,this.publication,category,author);
         return book;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
 }
