@@ -3,6 +3,8 @@ package br.com.zup.desafio1.controllers.form;
 import br.com.zup.desafio1.models.Author;
 import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
+import br.com.zup.desafio1.validate.FutureDate;
+import br.com.zup.desafio1.validate.UniqueValue;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -10,7 +12,9 @@ import java.time.LocalDate;
 
 public class BookRequest {
 
-    @NotBlank private String title;
+    @NotBlank
+    @UniqueValue(domainClass = Book.class, fieldName = "title")
+    private String title;
     @NotBlank  @Size(max = 500) private String resume;
     private String sumary;
     @NotNull @Min(20)
@@ -18,7 +22,9 @@ public class BookRequest {
     @NotNull @Min(100)
     private Long pages;
     @NotEmpty
+    @UniqueValue(domainClass = Book.class, fieldName = "isbn")
     private String isbn;
+    @FutureDate(domainClass = Book.class,fieldName = "publication")
     private LocalDate publication;
     @NotNull
     private Long categoryId;

@@ -5,6 +5,7 @@ import br.com.zup.desafio1.models.Author;
 import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -20,18 +21,17 @@ public class BookController {
     private EntityManager manager;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Transactional
-    public  String newBook(@RequestBody @Valid BookRequest request){
+    public ResponseEntity<?> newBook(@RequestBody @Valid BookRequest request){
         Author author = manager.find(Author.class,request.getAuthorId());
         Category category = manager.find(Category.class, request.getCategoryId());
 
         if(author != null && category != null){
             Book book = request.toModel(author,category);
             manager.persist(book);
-            return book.toString();
+            return ResponseEntity.ok(book.toString());
         }
-        return "Autor ou categoria não encontradas";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
 
     }
