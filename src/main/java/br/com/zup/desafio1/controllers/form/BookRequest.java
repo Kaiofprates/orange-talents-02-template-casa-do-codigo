@@ -1,18 +1,24 @@
 package br.com.zup.desafio1.controllers.form;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class BookRequest {
 
-    private String title;
-    private String resume;
+    @NotBlank private String title;
+    @NotBlank  @Size(max = 500) private String resume;
     private String sumary;
+    @NotNull @Min(20)
     private BigDecimal price;
+    @NotNull @Min(100)
     private Long pages;
+    @NotEmpty
     private String isbn;
     private LocalDate publication;
+    @NotNull
     private Long categoryId;
+    @NotNull
     private Long authorId;
 
     public BookRequest(String title,
