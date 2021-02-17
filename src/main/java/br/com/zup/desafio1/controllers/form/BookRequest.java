@@ -1,5 +1,9 @@
 package br.com.zup.desafio1.controllers.form;
 
+import br.com.zup.desafio1.models.Author;
+import br.com.zup.desafio1.models.Book;
+import br.com.zup.desafio1.models.Category;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -54,5 +58,18 @@ public class BookRequest {
                 ", categoryId=" + categoryId +
                 ", authoId=" + authorId +
                 '}';
+    }
+
+    public Book toModel(Author author, Category category){
+        Book book = new Book(this.title,this.sumary,this.price,this.pages,this.isbn,this.publication,category,author);
+        return book;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
     }
 }
