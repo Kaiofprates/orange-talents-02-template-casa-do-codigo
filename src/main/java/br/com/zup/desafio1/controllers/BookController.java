@@ -1,7 +1,7 @@
 package br.com.zup.desafio1.controllers;
 
-import br.com.zup.desafio1.controllers.form.BookRequest;
-import br.com.zup.desafio1.models.Author;
+import br.com.zup.desafio1.controllers.form.request.BookRequest;
+import br.com.zup.desafio1.controllers.form.response.BookResponse;
 import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
 import org.springframework.http.HttpStatus;
@@ -26,12 +26,20 @@ public class BookController {
         Book book = request.toModel(manager);
         if(book != null){
             manager.persist(book);
-            return ResponseEntity.ok(book.toString());
+            return ResponseEntity.ok(new BookResponse(book).Response());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
-
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getBook(@PathVariable Long id){
+        Book book = manager.find(Book.class,id);
+        if(book != null ){
+            return ResponseEntity.ok(new BookResponse(book).Response());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
 
 }

@@ -25,6 +25,10 @@ public class Book {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private  Author author;
 
+    @Deprecated
+    public Book(){
+    }
+
     public Book(String title, String sumary, BigDecimal price, Long pages, String isbn, LocalDate publication, Category category, Author author) {
         this.title = title;
         this.sumary = sumary;
@@ -49,5 +53,41 @@ public class Book {
                 ", category=" + category +
                 ", author=" + author +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSumary() {
+        return sumary;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Long getPages() {
+        return pages;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public LocalDate getPublication() {
+        return publication;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Author getAuthor() {
+        return author;
     }
 }

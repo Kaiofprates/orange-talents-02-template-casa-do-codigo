@@ -1,6 +1,7 @@
 package br.com.zup.desafio1.controllers;
 
-import br.com.zup.desafio1.controllers.form.CategoryRequest;
+import br.com.zup.desafio1.controllers.form.request.CategoryRequest;
+import br.com.zup.desafio1.controllers.form.response.CategoryResponse;
 import br.com.zup.desafio1.models.Category;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CategoryController {
     public ResponseEntity<?> newCategory(@RequestBody @Valid CategoryRequest form) {
         Category category = form.toModel();
         em.persist(category);
-        return ResponseEntity.status(HttpStatus.CREATED).body(category.toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CategoryResponse(category).Response());
     }
 
     @GetMapping("/{id}")

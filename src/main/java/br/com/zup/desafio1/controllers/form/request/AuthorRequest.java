@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.controllers.form;
+package br.com.zup.desafio1.controllers.form.request;
 
 import br.com.zup.desafio1.models.Author;
 import br.com.zup.desafio1.models.Category;
