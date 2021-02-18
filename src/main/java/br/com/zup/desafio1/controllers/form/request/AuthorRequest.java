@@ -26,8 +26,8 @@ public class AuthorRequest {
         this.description = description;
     }
 
-    public Author toModel(){
-        Author author = new Author(this.name,this.email,this.description);
+    public Author toModel() {
+        Author author = new Author(this.name, this.email, this.description);
         return author;
     }
 

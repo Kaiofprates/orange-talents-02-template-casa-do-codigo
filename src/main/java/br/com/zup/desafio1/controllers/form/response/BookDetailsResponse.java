@@ -7,30 +7,26 @@ import br.com.zup.desafio1.models.Category;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 
-public class BookResponse {
-
+public class BookDetailsResponse {
     private String title;
     private String sumary;
     private BigDecimal price;
     private Long pages;
     private String isbn;
     private String publication;
-    private Author author;
-    private Category category;
+    private AuthorResponseDetails author;
 
-    public BookResponse(Book book) {
+    public BookDetailsResponse(Book book) {
         this.title = book.getTitle();
         this.sumary = book.getSumary();
         this.price = book.getPrice();
         this.pages = book.getPages();
         this.isbn = book.getIsbn();
         this.publication = book.getPublication().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.author = book.getAuthor();
-        this.category = book.getCategory();
-
+        this.author = new AuthorResponseDetails(book.getAuthor().getName(),book.getAuthor().getDescription());
     }
 
-    public BookResponse Response() {
+    public BookDetailsResponse response() {
         return this;
     }
 
@@ -58,11 +54,7 @@ public class BookResponse {
         return publication;
     }
 
-    public Author getAuthor() {
+    public AuthorResponseDetails getAuthor() {
         return author;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 }

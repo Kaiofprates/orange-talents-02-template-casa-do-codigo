@@ -1,6 +1,7 @@
 package br.com.zup.desafio1.controllers;
 
 import br.com.zup.desafio1.controllers.form.request.BookRequest;
+import br.com.zup.desafio1.controllers.form.response.BookDetailsResponse;
 import br.com.zup.desafio1.controllers.form.response.BookFindAllRespose;
 import br.com.zup.desafio1.controllers.form.response.BookResponse;
 import br.com.zup.desafio1.models.Book;
@@ -14,6 +15,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -34,11 +37,11 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public ResponseEntity<?> getBook(@PathVariable Long id) {
         Book book = manager.find(Book.class, id);
         if (book != null) {
-            return ResponseEntity.ok(new BookResponse(book).Response());
+            return ResponseEntity.ok(new BookDetailsResponse(book).response());
         }
         return ResponseEntity.notFound().build();
     }
@@ -46,8 +49,12 @@ public class BookController {
     @GetMapping
     public ResponseEntity<?> findAll() {
         Query query = manager.createQuery("SELECT id, title FROM Book");
-        List<BookFindAllRespose> response = query.getResultList();
-        return ResponseEntity.ok(response);
+        List<BookFindAllRespose> list = query.getResultList();
+        List<BookFindAllRespose> response = new ArrayList();
+        for(BookFindAllRespose e : list){
+            System.out.printf(e.getId());
+        }
+        return ResponseEntity.ok(list);
     }
 
 

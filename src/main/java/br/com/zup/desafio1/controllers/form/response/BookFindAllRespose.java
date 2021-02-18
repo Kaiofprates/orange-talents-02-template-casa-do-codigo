@@ -8,6 +8,9 @@ public class BookFindAllRespose {
         this.title = title;
         this.id = id;
     }
+    @Deprecated
+    public BookFindAllRespose() {
+    }
 
     public String getTitle() {
         return title;
