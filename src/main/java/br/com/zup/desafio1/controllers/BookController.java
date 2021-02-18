@@ -49,11 +49,7 @@ public class BookController {
     @GetMapping
     public ResponseEntity<?> findAll() {
         Query query = manager.createQuery("SELECT id, title FROM Book");
-        List<BookFindAllRespose> list = query.getResultList();
-        List<BookFindAllRespose> response = new ArrayList();
-        for(BookFindAllRespose e : list){
-            System.out.printf(e.getId());
-        }
+        List<Book> list = query.getResultList();
         return ResponseEntity.ok(list);
     }
 

@@ -5,16 +5,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "book", uniqueConstraints = {@UniqueConstraint(columnNames = {"title","id","isbn"})})
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String title;
     private String sumary;
     private BigDecimal price;
     private Long pages;
+    @Column(unique = true)
     private String isbn;
     private LocalDate publication;
 

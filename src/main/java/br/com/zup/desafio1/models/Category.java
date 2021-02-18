@@ -4,8 +4,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "category", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "id"})})
 public class Category {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     @Column(unique = true)
@@ -23,7 +25,7 @@ public class Category {
         return name;
     }
 
-    public String setName(@NotBlank String name){
+    public String setName(@NotBlank String name) {
         return this.name = name;
     }
 

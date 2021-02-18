@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,9 @@ public class ValidationErrorHandler {
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
         fieldErrors.forEach(e -> {
             String mensagem = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            FormErrorDto erro = new FormErrorDto(e.getField(), mensagem);
+            int status = HttpStatus.BAD_REQUEST.value();
+            LocalDateTime time = LocalDateTime.now();
+            FormErrorDto erro = new FormErrorDto(e.getField(), mensagem,status,time);
             dto.add(erro);
         });
 

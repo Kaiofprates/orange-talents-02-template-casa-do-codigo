@@ -1,20 +1,34 @@
 package br.com.zup.desafio1.handler;
 
+import java.time.LocalDateTime;
+
 public class FormErrorDto {
 
     private String field;
-    private String message;
+    private String error;
+    private int status;
+    private LocalDateTime timeStamp;
 
-    public FormErrorDto(String field, String message) {
+    public FormErrorDto(String field, String message, int status, LocalDateTime timeStamp) {
         this.field = field;
-        this.message = message;
+        this.error = message;
+        this.status = status;
+        this.timeStamp = timeStamp;
     }
 
     public String getField() {
         return field;
     }
 
-    public String getMessage() {
-        return message;
+    public String getError() {
+        return error;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getTimeStamp() {
+        return timeStamp;
     }
 }
