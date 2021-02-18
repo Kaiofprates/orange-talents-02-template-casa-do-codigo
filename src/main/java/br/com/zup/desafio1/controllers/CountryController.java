@@ -1,6 +1,9 @@
 package br.com.zup.desafio1.controllers;
 
 import br.com.zup.desafio1.controllers.form.request.CountryRequest;
+import br.com.zup.desafio1.controllers.form.response.BookDetailsResponse;
+import br.com.zup.desafio1.controllers.form.response.BookFindAllRespose;
+import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
 import br.com.zup.desafio1.models.Country;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.SqlResultSetMapping;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/country")
@@ -38,4 +43,6 @@ public class CountryController {
         }
         return ResponseEntity.notFound().build();
     }
+
+
 }

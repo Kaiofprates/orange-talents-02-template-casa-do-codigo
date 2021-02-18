@@ -7,11 +7,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "estate", uniqueConstraints = {@UniqueConstraint(columnNames = {"id","name"})})
+@Table(name = "estate", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 public class Estate {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
     private String name;
 
     @Column(name = "country_id")

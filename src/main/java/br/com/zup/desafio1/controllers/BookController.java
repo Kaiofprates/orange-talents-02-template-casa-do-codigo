@@ -18,6 +18,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/book")
@@ -47,10 +49,13 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        Query query = manager.createQuery("SELECT id, title FROM Book");
-        List<Book> list = query.getResultList();
-        return ResponseEntity.ok(list);
+    @Transactional
+    public List<BookFindAllRespose> findAll() {
+
+        return manager.createQuery("select b from Book b", Book.class)
+                .getResultStream()
+                .map(BookFindAllRespose::new)
+                .collect(Collectors.toList());
     }
 
 
