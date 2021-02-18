@@ -14,17 +14,19 @@ public class Estate {
     @Column(unique = true)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
-    private Country country;
+    @Column(name = "country_id")
+    private Long country;
+
+    private String countryName;
 
     @Deprecated
     public Estate(){
     }
 
-    public Estate(String name, @NotNull Country country) {
+    public Estate(String name, Long country,String countryName) {
         this.name = name;
         this.country = country;
+        this.countryName = countryName;
     }
 
     public Long getId() {
@@ -35,7 +37,7 @@ public class Estate {
         return name;
     }
 
-    public Country getCountry() {
-        return country;
+    public String getCountryName() {
+        return countryName;
     }
 }

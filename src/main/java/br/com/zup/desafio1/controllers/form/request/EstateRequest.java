@@ -7,8 +7,10 @@ import com.sun.source.tree.CompilationUnitTree;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class EstateRequest {
     @NotBlank
@@ -30,11 +32,11 @@ public class EstateRequest {
         return countryId;
     }
 
+    @Transactional
     public Estate toModel(EntityManager manager) {
       @NotNull Country country = manager.find(Country.class,this.countryId);
       Assert.state(country != null, "Country not found");
-
-      Estate estate = new Estate(this.name,country);
+      Estate estate = new Estate(this.name,country.getId(),country.getName());
       return estate;
     }
 }

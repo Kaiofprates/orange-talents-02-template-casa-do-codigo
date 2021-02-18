@@ -1,6 +1,7 @@
 package br.com.zup.desafio1.controllers;
 
 import br.com.zup.desafio1.controllers.form.request.CountryRequest;
+import br.com.zup.desafio1.models.Category;
 import br.com.zup.desafio1.models.Country;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,12 @@ public class CountryController {
         return ResponseEntity.badRequest().build();
     }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCountryById(@PathVariable Long id){
+        Country country = manager.find(Country.class,id);
+        if(country != null ){
+            return ResponseEntity.ok(country);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

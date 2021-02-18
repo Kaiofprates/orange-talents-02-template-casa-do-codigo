@@ -14,6 +14,10 @@ public class Country {
     @NotBlank
     private String name;
 
+    @OneToMany
+    @JoinColumn(name = "country_id")
+    private List<Estate> estates;
+
     @Deprecated
     public Country() {
     }
@@ -26,6 +30,16 @@ public class Country {
         return name;
     }
 
+    public List<Estate> getEstates() {
+        return estates;
+    }
 
+    public void setEstates(List<Estate> estates) {
+        this.estates = estates;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
 
