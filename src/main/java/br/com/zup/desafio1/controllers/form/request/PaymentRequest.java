@@ -28,9 +28,12 @@ public class PaymentRequest {
     private String complement;
     @NotEmpty
     private String city;
+    @NotEmpty
     private Long countryId;
     private Long estateId;
+    @NotEmpty
     private String phone;
+    @NotEmpty
     private String cep;
 
     @Deprecated
