@@ -1,6 +1,6 @@
 package br.com.zup.desafio1.validate.StateDuplicate;
 
-import br.com.zup.desafio1.handler.exceptions.StateDuplicateException;
+import br.com.zup.desafio1.handler.exceptions.CustonMessageException;
 import org.springframework.beans.BeanWrapperImpl;
 
 import javax.persistence.EntityManager;
@@ -27,12 +27,14 @@ public class StateForCountryValidator implements ConstraintValidator<StateForCou
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        System.out.printf("-------------- " + new BeanWrapperImpl(value).getPropertyValue(fields.get(1)));
+
         Query query = manager.createQuery("select s from State s where s.country = :countryId and s.name =:name");
         query.setParameter(fields.get(1), new BeanWrapperImpl(value).getPropertyValue(fields.get(1)));
         query.setParameter(fields.get(0), new BeanWrapperImpl(value).getPropertyValue(fields.get(0)));
         List<?> list = query.getResultList();
         if (!list.isEmpty()) {
-            throw new StateDuplicateException("Duplicate values for state");
+            throw new CustonMessageException("Duplicate values for state");
         }
 
         return true;

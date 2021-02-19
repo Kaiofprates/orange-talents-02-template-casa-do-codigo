@@ -1,8 +1,9 @@
 package br.com.zup.desafio1.controllers.form.request;
 
-import br.com.zup.desafio1.handler.exceptions.StateDuplicateException;
+import br.com.zup.desafio1.handler.exceptions.CustonMessageException;
 import br.com.zup.desafio1.models.Country;
 import br.com.zup.desafio1.models.Payment;
+import br.com.zup.desafio1.validate.CnpjORCpf.CnpjOrCpf;
 import br.com.zup.desafio1.validate.IdExists.ExistId;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -12,7 +13,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-
+@CnpjOrCpf(domainClass = PaymentRequest.class,fieldName = {"document"})
 public class PaymentRequest {
 
     //@UniqueValue(domainClass = Payment.class, fieldName = "email")
@@ -23,7 +24,6 @@ public class PaymentRequest {
     @NotBlank
     private String surname;
     @NotBlank
-    @CPF
     //@UniqueValue(domainClass = Payment.class, fieldName = "document")
     private String document;
     @NotBlank
@@ -37,7 +37,7 @@ public class PaymentRequest {
     @NotBlank
     @ExistId(domainClass = Country.class, fieldName = "name")
     private String country;
-
+    // A regra de negócio vai exigir uma rota de consulta que retorne todos os estados de um país.
     private String state;
     @NotBlank
     private String phone;
@@ -50,13 +50,19 @@ public class PaymentRequest {
 
     public Payment toModel(EntityManager manager) {
         Payment payment = new Payment("email.com.br", "32212011");
+
+        /*
+        *  Criei essa lógica para ( caso um nome de estado seja passado )
+        *  validar no banco de dados a sua relação com o pais informado
+        */
+
         if (this.state != null) {
             Query query = manager.createQuery("select s from State s where s.countryName = :country and s.name =:name");
             query.setParameter("country", this.country);
             query.setParameter("name", this.state);
             List<?> list = query.getResultList();
             if (list.isEmpty()) {
-                throw new StateDuplicateException("The informed state does not exist in that country");
+                throw new CustonMessageException("The informed state does not exist in that country");
             }
         }
         return payment;

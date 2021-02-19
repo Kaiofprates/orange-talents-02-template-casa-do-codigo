@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.validate.StateExists;
+package br.com.zup.desafio1.validate.CnpjORCpf;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,19 +10,24 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = ExistsStateValidator.class)
+@Constraint(validatedBy = CnpjOrCpfValidator.class)
 @Target({ TYPE })
 @Retention(RUNTIME)
 
-public @interface ExistsState {
+public @interface CnpjOrCpf {
 
-    String message() default "The informed state does not exist in that country";
+    /**
+     * Dê a Cezar o que é de Cezar
+     * Essa annotation usa o algoritmo do desenvolvedor abaixo
+     * @author Clairton Luz - clairton.c.l@gmail.com
+     *
+     */
 
+    String message() default "CPF/CNPJ inválido";
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
     String[] fieldName();
     Class<?> domainClass();
-
 
 }

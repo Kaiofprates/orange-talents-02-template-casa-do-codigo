@@ -16,6 +16,7 @@ public class Payment {
 
     @Column(unique = true)
     private String document;
+
     @Deprecated
     public Payment() {
     }
