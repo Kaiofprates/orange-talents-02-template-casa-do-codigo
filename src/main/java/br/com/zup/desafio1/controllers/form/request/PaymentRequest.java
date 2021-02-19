@@ -1,5 +1,6 @@
 package br.com.zup.desafio1.controllers.form.request;
 
+import antlr.PythonCharFormatter;
 import br.com.zup.desafio1.handler.exceptions.CustonMessageException;
 import br.com.zup.desafio1.models.Country;
 import br.com.zup.desafio1.models.Payment;
@@ -49,8 +50,20 @@ public class PaymentRequest {
     }
 
     public Payment toModel(EntityManager manager) {
-        Payment payment = new Payment("email.com.br", "32212011");
-
+        Payment payment = new Payment(
+                this.email,
+                this.name,
+                this.surname,
+                this.document,
+                this.address,
+                this.number,
+                this.complement,
+                this.city,
+                this.country,
+                this.state,
+                this.phone,
+                this.cep
+        );
         /*
         *  Criei essa lógica para ( caso um nome de estado seja passado )
         *  validar no banco de dados a sua relação com o pais informado

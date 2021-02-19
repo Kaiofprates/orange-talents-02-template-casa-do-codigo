@@ -3,6 +3,7 @@ package br.com.zup.desafio1.controllers;
 import br.com.zup.desafio1.controllers.form.request.CountryRequest;
 import br.com.zup.desafio1.controllers.form.response.BookDetailsResponse;
 import br.com.zup.desafio1.controllers.form.response.BookFindAllRespose;
+import br.com.zup.desafio1.controllers.form.response.CountryFindAllRespose;
 import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
 import br.com.zup.desafio1.models.Country;
@@ -44,6 +45,14 @@ public class CountryController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping
+    @Transactional
+    public List<CountryFindAllRespose> findAll() {
+        return manager.createQuery("select c from Country c", Country.class)
+                .getResultStream()
+                .map(CountryFindAllRespose::new)
+                .collect(Collectors.toList());
+    }
 
 
 
