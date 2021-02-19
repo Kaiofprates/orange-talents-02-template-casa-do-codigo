@@ -1,7 +1,7 @@
 package br.com.zup.desafio1.controllers.form.request;
 
 import br.com.zup.desafio1.models.Country;
-import br.com.zup.desafio1.validate.UniqueValue;
+import br.com.zup.desafio1.validate.unique.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
 

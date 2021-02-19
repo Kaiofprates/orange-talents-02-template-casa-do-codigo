@@ -31,7 +31,7 @@ public class ValidationErrorHandler {
             FormErrorDto erro = new FormErrorDto(e.getField(), mensagem,status,time);
             dto.add(erro);
         });
-
         return dto;
     }
+
 }

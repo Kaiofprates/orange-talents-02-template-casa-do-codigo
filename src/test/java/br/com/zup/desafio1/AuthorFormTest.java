@@ -39,8 +39,8 @@ public class AuthorFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("The name field cannot be empty"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("The name field cannot be empty"))
                 .andExpect(jsonPath("$[0].field").value("name"))
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -53,8 +53,8 @@ public class AuthorFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("The email field cannot be empty"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("The email field cannot be empty"))
                 .andExpect(jsonPath("$[0].field").value("email"))
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -68,8 +68,8 @@ public class AuthorFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("Enter a valid email"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("Enter a valid email"))
                 .andExpect(jsonPath("$[0].field").value("email"))
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -83,8 +83,8 @@ public class AuthorFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("The description field cannot be empty"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("The description field cannot be empty"))
                 .andExpect(jsonPath("$[0].field").value("description"))
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -98,8 +98,8 @@ public class AuthorFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("The maximum number of words is 400"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("The maximum number of words is 400"))
                 .andExpect(jsonPath("$[0].field").value("description"))
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -118,8 +118,8 @@ public class AuthorFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("duplicate values"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("duplicate values"))
                 .andExpect(jsonPath("$[0].field").value("email"))
                 .andDo(MockMvcResultHandlers.print());
     }

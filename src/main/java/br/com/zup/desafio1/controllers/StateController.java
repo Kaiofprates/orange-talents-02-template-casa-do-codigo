@@ -1,7 +1,7 @@
 package br.com.zup.desafio1.controllers;
 
-import br.com.zup.desafio1.controllers.form.request.EstateRequest;
-import br.com.zup.desafio1.models.Estate;
+import br.com.zup.desafio1.controllers.form.request.StateRequest;
+import br.com.zup.desafio1.models.State;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,18 +14,18 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/estate")
-public class EstateController {
+@RequestMapping("/state")
+public class StateController {
     @PersistenceContext
     private EntityManager manager;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> createEstate(@RequestBody @Valid EstateRequest request){
-        Estate estate = request.toModel(manager);
-        if(estate != null){
-            manager.persist(estate);
-            return ResponseEntity.ok(estate);
+    public ResponseEntity<?> createState(@RequestBody @Valid StateRequest request){
+        State state = request.toModel(manager);
+        if(state != null){
+            manager.persist(state);
+            return ResponseEntity.ok(state);
         }
         return ResponseEntity.badRequest().build();
     }

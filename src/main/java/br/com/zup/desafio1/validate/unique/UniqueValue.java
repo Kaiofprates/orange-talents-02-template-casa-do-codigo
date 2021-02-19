@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.validate;
+package br.com.zup.desafio1.validate.unique;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -19,9 +19,7 @@ public @interface  UniqueValue {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
     String fieldName();
-
     Class<?> domainClass();
 
 }

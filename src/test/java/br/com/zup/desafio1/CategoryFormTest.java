@@ -33,8 +33,8 @@ public class CategoryFormTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(data))
         ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(jsonPath("$[0].message").isString())
-                .andExpect(jsonPath("$[0].message").value("The name field cannot be empty"))
+                .andExpect(jsonPath("$[0].error").isString())
+                .andExpect(jsonPath("$[0].error").value("The name field cannot be empty"))
                 .andExpect(jsonPath("$[0].field").value("name"))
                 .andDo(MockMvcResultHandlers.print());
     }

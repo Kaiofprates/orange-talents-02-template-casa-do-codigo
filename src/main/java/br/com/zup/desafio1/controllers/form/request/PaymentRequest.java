@@ -1,8 +1,7 @@
 package br.com.zup.desafio1.controllers.form.request;
 
 import br.com.zup.desafio1.models.Payment;
-import br.com.zup.desafio1.validate.UniqueValue;
-import org.hibernate.validator.constraints.NotBlank;
+import br.com.zup.desafio1.validate.unique.UniqueValue;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;

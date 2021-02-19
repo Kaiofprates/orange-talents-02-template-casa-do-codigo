@@ -16,7 +16,7 @@ public class Country {
 
     @OneToMany
     @JoinColumn(name = "country_id")
-    private List<Estate> estates;
+    private List<State> states;
 
     @Deprecated
     public Country() {
@@ -30,12 +30,12 @@ public class Country {
         return name;
     }
 
-    public List<Estate> getEstates() {
-        return estates;
+    public List<State> getEstates() {
+        return states;
     }
 
-    public void setEstates(List<Estate> estates) {
-        this.estates = estates;
+    public void setEstates(List<State> states) {
+        this.states = states;
     }
 
     public Long getId() {

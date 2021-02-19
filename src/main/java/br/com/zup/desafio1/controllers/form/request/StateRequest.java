@@ -1,25 +1,26 @@
 package br.com.zup.desafio1.controllers.form.request;
 
 import br.com.zup.desafio1.models.Country;
-import br.com.zup.desafio1.models.Estate;
-import br.com.zup.desafio1.validate.UniqueValue;
-import com.sun.source.tree.CompilationUnitTree;
+import br.com.zup.desafio1.models.State;
+import br.com.zup.desafio1.validate.id.ExistId;
+import br.com.zup.desafio1.validate.state.StateForCountryValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-
-public class EstateRequest {
+@StateForCountryValue(domainClass = State.class,fieldName = { "name", "countryId" })
+public class StateRequest {
     @NotBlank
-    @UniqueValue(domainClass = Estate.class, fieldName = "name")
+    //@UniqueValue(domainClass = State.class, fieldName = "name")
     private String name;
+
     @NotNull
+    @ExistId(domainClass = Country.class,fieldName = "id")
     private Long countryId;
 
-    public EstateRequest(String name, Long coutryId) {
+    public StateRequest(String name, Long coutryId) {
         this.name = name;
         this.countryId = coutryId;
     }
@@ -33,10 +34,10 @@ public class EstateRequest {
     }
 
     @Transactional
-    public Estate toModel(EntityManager manager) {
+    public State toModel(EntityManager manager) {
       @NotNull Country country = manager.find(Country.class,this.countryId);
       Assert.state(country != null, "Country not found");
-      Estate estate = new Estate(this.name,country.getId(),country.getName());
-      return estate;
+      State state = new State(this.name,country.getId(),country.getName());
+      return state;
     }
 }
