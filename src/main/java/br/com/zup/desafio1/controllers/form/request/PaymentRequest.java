@@ -5,7 +5,9 @@ import br.com.zup.desafio1.handler.exceptions.CustonMessageException;
 import br.com.zup.desafio1.models.Country;
 import br.com.zup.desafio1.models.Payment;
 import br.com.zup.desafio1.validate.CnpjORCpf.CnpjOrCpf;
+import br.com.zup.desafio1.validate.CpfOrCnpjValidator.CPFOuCNPJ;
 import br.com.zup.desafio1.validate.IdExists.ExistId;
+import br.com.zup.desafio1.validate.UniqueValues.UniqueValue;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.EntityManager;
@@ -14,10 +16,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-@CnpjOrCpf(domainClass = PaymentRequest.class,fieldName = {"document"})
+//@CnpjOrCpf(domainClass = PaymentRequest.class,fieldName = {"document"})
 public class PaymentRequest {
 
-    //@UniqueValue(domainClass = Payment.class, fieldName = "email")
+    @UniqueValue(domainClass = Payment.class, fieldName = "email")
     @Email
     private String email;
     @NotBlank
@@ -25,7 +27,8 @@ public class PaymentRequest {
     @NotBlank
     private String surname;
     @NotBlank
-    //@UniqueValue(domainClass = Payment.class, fieldName = "document")
+    @UniqueValue(domainClass = Payment.class, fieldName = "document")
+    @CPFOuCNPJ
     private String document;
     @NotBlank
     private String address;
