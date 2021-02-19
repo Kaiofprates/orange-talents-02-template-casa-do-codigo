@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.validate.state;
+package br.com.zup.desafio1.validate.StateDuplicate;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

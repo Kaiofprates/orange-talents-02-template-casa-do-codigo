@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/payment")
@@ -18,7 +19,8 @@ public class PaymentController {
     private EntityManager manager;
 
     @PostMapping
-    public ResponseEntity<?> createNewPayment(@RequestBody PaymentRequest request){
+    public ResponseEntity<?> createNewPayment(@RequestBody @Valid  PaymentRequest request){
+        request.toModel(manager);
         return ResponseEntity.ok(request);
     }
 

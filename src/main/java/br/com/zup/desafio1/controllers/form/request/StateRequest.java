@@ -2,8 +2,8 @@ package br.com.zup.desafio1.controllers.form.request;
 
 import br.com.zup.desafio1.models.Country;
 import br.com.zup.desafio1.models.State;
-import br.com.zup.desafio1.validate.id.ExistId;
-import br.com.zup.desafio1.validate.state.StateForCountryValue;
+import br.com.zup.desafio1.validate.IdExists.ExistId;
+import br.com.zup.desafio1.validate.StateDuplicate.StateForCountryValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @StateForCountryValue(domainClass = State.class,fieldName = { "name", "countryId" })
 public class StateRequest {
     @NotBlank
-    //@UniqueValue(domainClass = State.class, fieldName = "name")
     private String name;
 
     @NotNull

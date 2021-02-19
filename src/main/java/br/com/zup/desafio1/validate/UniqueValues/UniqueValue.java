@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.validate.unique;
+package br.com.zup.desafio1.validate.UniqueValues;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

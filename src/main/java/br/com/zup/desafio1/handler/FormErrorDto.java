@@ -2,7 +2,7 @@ package br.com.zup.desafio1.handler;
 
 import java.time.LocalDateTime;
 
-public class FormErrorDto extends RuntimeException {
+public class FormErrorDto {
 
     private String field;
     private String error;

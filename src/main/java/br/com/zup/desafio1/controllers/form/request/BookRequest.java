@@ -3,8 +3,8 @@ package br.com.zup.desafio1.controllers.form.request;
 import br.com.zup.desafio1.models.Author;
 import br.com.zup.desafio1.models.Book;
 import br.com.zup.desafio1.models.Category;
-import br.com.zup.desafio1.validate.id.ExistId;
-import br.com.zup.desafio1.validate.unique.UniqueValue;
+import br.com.zup.desafio1.validate.IdExists.ExistId;
+import br.com.zup.desafio1.validate.UniqueValues.UniqueValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;

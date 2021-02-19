@@ -1,4 +1,4 @@
-package br.com.zup.desafio1.validate.id;
+package br.com.zup.desafio1.validate.UniqueValues;
 
 import org.springframework.util.Assert;
 
@@ -9,16 +9,15 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistIdValidator implements ConstraintValidator<ExistId, Object> {
+public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Object> {
 
     private  String domainAttribute;
     private Class<?> klass;
-
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public void initialize(ExistId params) {
+    public void initialize(UniqueValue params) {
         domainAttribute = params.fieldName();
         klass = params.domainClass();
 
@@ -26,16 +25,10 @@ public class ExistIdValidator implements ConstraintValidator<ExistId, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-
-        if(value == null){
-            return  true;
-        }
-
         Query query = manager.createQuery( "select 1 from "+klass.getName()+" where "+domainAttribute+ "=:value");
         query.setParameter("value", value);
-
         List<?> list = query.getResultList();
-        Assert.isTrue(list.size() <=1,"no results for id "+value );
-        return !list.isEmpty();
+        Assert.state(list.size() <=1, " Foi encontrado mais de um "+klass+" com o atributo "+domainAttribute+" = "+value);
+        return list.isEmpty();
     }
 }
