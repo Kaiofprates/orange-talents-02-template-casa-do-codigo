@@ -1,6 +1,6 @@
 package br.com.zup.desafio1;
 
-import br.com.zup.desafio1.models.Author;
+import br.com.zup.desafio1.Author.Author;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
