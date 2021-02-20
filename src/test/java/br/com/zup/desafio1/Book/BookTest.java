@@ -63,7 +63,7 @@ public class BookTest {
     public void LivroCadastradoComSucesso() throws Exception{
         manager.persist(testAuthor);
         manager.persist(categoriaDeTeste);
-        Assert.assertNotNull("Author não criado ",testAuthor);
+        Assert.assertNotNull("Autor não criado ",testAuthor);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/book")
                 .accept(MediaType.APPLICATION_JSON)
