@@ -99,5 +99,51 @@ public class ClientRequest {
         this.cep = cep;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getCep() {
+        return cep;
+    }
 }

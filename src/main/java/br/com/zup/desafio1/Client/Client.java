@@ -46,4 +46,8 @@ public class Client {
         this.phone = phone;
         this.cep = cep;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
