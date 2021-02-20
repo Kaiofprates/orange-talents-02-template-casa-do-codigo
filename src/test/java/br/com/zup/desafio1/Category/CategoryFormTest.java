@@ -1,4 +1,4 @@
-package br.com.zup.desafio1;
+package br.com.zup.desafio1.Category;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;

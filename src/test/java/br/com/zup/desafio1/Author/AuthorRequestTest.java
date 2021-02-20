@@ -1,4 +1,4 @@
-package br.com.zup.desafio1;
+package br.com.zup.desafio1.Author;
 
 public class AuthorRequestTest {
     private String name;

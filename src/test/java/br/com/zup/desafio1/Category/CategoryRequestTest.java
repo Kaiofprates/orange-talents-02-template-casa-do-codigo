@@ -1,4 +1,4 @@
-package br.com.zup.desafio1;
+package br.com.zup.desafio1.Category;
 
 public class CategoryRequestTest {
     private String name;
